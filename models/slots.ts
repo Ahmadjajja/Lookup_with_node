@@ -1,5 +1,6 @@
 // const mongoose = require('mongoose');
 import mongoose from "mongoose";
+
 import Doctor from "./doctor"
 
 interface slotsSchemaTypes {
@@ -15,19 +16,11 @@ const slotsSchema = new mongoose.Schema<slotsSchemaTypes>({
     },
     availability: {
         type: String,
-        required: true,
-    },
+        required: true, 
+    }
  
 })
-// categorySchema.virtual('id').get(function () {
-//     return this._id.toHexString();
-// });
 
-// categorySchema.set('toJSON', {
-//     virtuals: true,
-// });
-
-// exports.Slots = mongoose.model('Slots', slotsSchema);
 
 const Slots = mongoose.model<slotsSchemaTypes>('Slots', slotsSchema);
 

@@ -16,9 +16,9 @@ const express_1 = __importDefault(require("express"));
 const router = express_1.default.Router();
 const booking_1 = __importDefault(require("../models/booking"));
 router.get('/b', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const BookingList = yield booking_1.default.find();
+    const bookingList = yield booking_1.default.find();
     console.log("Booking", booking_1.default);
-    console.log("BookingList", BookingList);
-    return res.status(200).send(`hello ahmad from booking api`);
+    console.log("BookingList", bookingList);
+    return res.status(200).send(`hello ahmad from booking api \n ${bookingList} `);
 }));
 exports.default = router;

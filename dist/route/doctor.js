@@ -15,10 +15,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const router = express_1.default.Router();
 const doctor_1 = __importDefault(require("../models/doctor"));
-router.get('/d', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const DoctorList = yield doctor_1.default.find();
+router.get('/doc', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const DoctorList = yield doctor_1.default.find({ gender: "female" });
     console.log("Doctor", doctor_1.default);
     console.log("DoctorList", DoctorList);
-    return res.status(200).send(`hello ahmad from doctor api`);
+    return res.status(200).send(`hello ahmad from doctor api \n ${DoctorList}`);
 }));
 exports.default = router;

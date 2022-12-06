@@ -2,8 +2,6 @@ import express, { Express, Request, Response } from 'express';
 import cors from "cors"; 
 import morgan from "morgan";
 import mongoose from 'mongoose';
-// import mongojs from "mongojs"
-import {MongoClient, ServerApiVersion} from "mongodb"
 import * as dotenv from 'dotenv';
 import 'dotenv/config';
 import userRoute from './route/user';
@@ -41,26 +39,17 @@ app.get("/", (req: Request, res: Response) => {
 });
 
 
-
-
-
-// console.log("working")
-// var db = mongojs.connect("mongodb+srv://ahmadjajja86:ahmadjajja86@cluster0.ua4hncd.mongodb.net/?retryWrites=true&w=majority", collections);
-
 //Database
 mongoose
-  .connect("mongodb+srv://ahmadjajja86:ahmadjajja86@cluster0.ua4hncd.mongodb.net/?retryWrites=true&w=majority", {
-    // useNewUrlParser: true,
-    // useUnifiedTopology: true,
-    dbName: "Testing",
-  })
+  .connect("mongodb+srv://ahmadjajja86:ahmadjajja86@cluster0.ua4hncd.mongodb.net/Testing?retryWrites=true&w=majority")
   .then(() => {
     console.log("Database Connection is ready...");
+    app.listen(port, () => {
+      console.log(`⚡️[server]: Server is running at https://localhost:${port}`);
+    });
   })
   .catch((err) => {
+    // throw createHttpError(501, "Unable to connect to database");
     console.log(err);
   });
 
-app.listen(port, () => {
-  console.log(`⚡️[server]: Server is running at https://localhost:${port}`);
-});

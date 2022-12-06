@@ -45,7 +45,7 @@ const patientSchema = new mongoose_1.default.Schema({
         type: String,
         required: true,
     },
-    disease: {
+    diseases: {
         type: String,
         required: true,
     },

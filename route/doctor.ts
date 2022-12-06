@@ -6,12 +6,12 @@ import Doctor from "../models/doctor";
 
 
 
-router.get('/d', async (req: Request, res: Response) => {
+router.get('/doc', async (req: Request, res: Response) => {
     
-    const DoctorList:any = await Doctor.find();
+    const DoctorList:any = await Doctor.find({gender: "female"});
     console.log("Doctor",Doctor);
     console.log("DoctorList",DoctorList);
-    return res.status(200).send(`hello ahmad from doctor api`);
+    return res.status(200).send(`hello ahmad from doctor api \n ${DoctorList}`);
     
 })
-export default router;
+export default router;  

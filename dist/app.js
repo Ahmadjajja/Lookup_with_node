@@ -60,21 +60,16 @@ app.get("/", (req, res) => {
     console.log('Ahmad this api is working');
     console.log('====================================');
 });
-// console.log("working")
-// var db = mongojs.connect("mongodb+srv://ahmadjajja86:ahmadjajja86@cluster0.ua4hncd.mongodb.net/?retryWrites=true&w=majority", collections);
 //Database
 mongoose_1.default
-    .connect("mongodb+srv://ahmadjajja86:ahmadjajja86@cluster0.ua4hncd.mongodb.net/?retryWrites=true&w=majority", {
-    // useNewUrlParser: true,
-    // useUnifiedTopology: true,
-    dbName: "Testing",
-})
+    .connect("mongodb+srv://ahmadjajja86:ahmadjajja86@cluster0.ua4hncd.mongodb.net/Testing?retryWrites=true&w=majority")
     .then(() => {
     console.log("Database Connection is ready...");
+    app.listen(port, () => {
+        console.log(`⚡️[server]: Server is running at https://localhost:${port}`);
+    });
 })
     .catch((err) => {
+    // throw createHttpError(501, "Unable to connect to database");
     console.log(err);
-});
-app.listen(port, () => {
-    console.log(`⚡️[server]: Server is running at https://localhost:${port}`);
 });

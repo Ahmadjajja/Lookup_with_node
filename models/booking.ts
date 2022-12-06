@@ -1,10 +1,10 @@
-// const mongoose = require('mongoose');
 import mongoose from "mongoose";
+
 import Slots from "./slots";
 import Patient from "./patient";
 import Doctor from "./doctor";
 
-
+ 
 interface bookingSchemaTypes {
     patientId: mongoose.Types.ObjectId;
     doctorId: mongoose.Types.ObjectId;
@@ -29,12 +29,8 @@ const bookingSchema = new mongoose.Schema<bookingSchemaTypes>({
     },
 })
 
-
-bookingSchema.set('toJSON', {
-    virtuals: true,
-});
-
 const Booking = mongoose.model<bookingSchemaTypes>('Booking', bookingSchema);
 
 
 export default Booking
+

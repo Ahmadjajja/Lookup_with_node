@@ -12,7 +12,7 @@ interface patientSchemaTypes {
     address: string;
     about: string;
     registered: string;
-    disease: string;
+    diseases: string;
   }
 
 const patientSchema = new mongoose.Schema<patientSchemaTypes>({
@@ -56,10 +56,10 @@ const patientSchema = new mongoose.Schema<patientSchemaTypes>({
         type: String,
         required: true,
     },
-    disease: {
+    diseases: {
         type: String,
         required: true,
-    },
+    }, 
 })
 // categorySchema.virtual('id').get(function () {
 //     return this._id.toHexString();

@@ -45,7 +45,7 @@ const doctorSchema = new mongoose_1.default.Schema({
 });
 // categorySchema.virtual('id').get(function () {
 //     return this._id.toHexString();
-// });
+// }); 
 // categorySchema.set('toJSON', {
 //     virtuals: true,
 // });

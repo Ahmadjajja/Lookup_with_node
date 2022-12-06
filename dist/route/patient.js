@@ -19,6 +19,6 @@ router.get('/p', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const patientList = yield patient_1.default.find();
     console.log("Patient", patient_1.default);
     console.log("PatientList", patientList);
-    return res.status(200).send(`hello ahmad from patient api`);
+    return res.status(200).send(`hello ahmad from patient api \n ${patientList}`);
 }));
 exports.default = router;

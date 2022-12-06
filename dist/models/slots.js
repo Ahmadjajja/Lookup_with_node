@@ -15,14 +15,7 @@ const slotsSchema = new mongoose_1.default.Schema({
     availability: {
         type: String,
         required: true,
-    },
+    }
 });
-// categorySchema.virtual('id').get(function () {
-//     return this._id.toHexString();
-// });
-// categorySchema.set('toJSON', {
-//     virtuals: true,
-// });
-// exports.Slots = mongoose.model('Slots', slotsSchema);
 const Slots = mongoose_1.default.model('Slots', slotsSchema);
 exports.default = Slots;

@@ -16,9 +16,28 @@ const express_1 = __importDefault(require("express"));
 const router = express_1.default.Router();
 const doctor_1 = __importDefault(require("../models/doctor"));
 router.get('/doc', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const DoctorList = yield doctor_1.default.find({ gender: "female" });
+    const DoctorList = yield doctor_1.default.find();
     console.log("Doctor", doctor_1.default);
     console.log("DoctorList", DoctorList);
     return res.status(200).send(`hello ahmad from doctor api \n ${DoctorList}`);
+}));
+router.post('/dPost', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    let doctorData = new doctor_1.default({
+        picture: req.body.picture,
+        doctorName: req.body.doctorName,
+        gender: req.body.gender,
+        hospitalName: req.body.hospitalName,
+        email: req.body.email,
+        phone: req.body.phone,
+        address: req.body.address,
+        about: req.body.about,
+        registered: req.body.registered,
+        qualification: req.body.qualification
+    });
+    doctorData = yield doctorData.save();
+    console.log("doctorData \n", doctorData);
+    if (!doctorData)
+        return res.status(400).send('the doctorData cannot be created!');
+    return res.send(doctorData);
 }));
 exports.default = router;

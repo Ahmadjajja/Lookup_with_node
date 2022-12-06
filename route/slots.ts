@@ -6,13 +6,30 @@ import Slots from "../models/slots";
 
 
 
-
 router.get('/s', async (req: Request, res: Response) => {
     
-    const slotsList:any = await Slots.find({availability: "04:00 to 06:00 PM"});
-    console.log("Slots",Slots);
-    console.log("slotsList",slotsList);
-    return res.status(200).send(`hello ahmad from slots api \n ${slotsList} `);
+    const slotsList:any = await Slots.aggregate(
+        [
+          {
+            $lookup:{
+              from : "doctors", 
+              localField: "doctorId",
+              foreignField: "_id",
+              as: "doctorData"
+            }
+          }
+        ]
+        ).exec((err, result)=>{
+            if (err) {
+                console.log("error" ,err)
+            }
+            if (result) {
+                console.log("result", result);
+                return res.status(200).json(result);
+            }
+      });
+    
+    
     
 })
 export default router;

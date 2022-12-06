@@ -16,9 +16,39 @@ const express_1 = __importDefault(require("express"));
 const router = express_1.default.Router();
 const booking_1 = __importDefault(require("../models/booking"));
 router.get('/b', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const bookingList = yield booking_1.default.find();
-    console.log("Booking", booking_1.default);
-    console.log("BookingList", bookingList);
-    return res.status(200).send(`hello ahmad from booking api \n ${bookingList} `);
+    const bookingList = yield booking_1.default.aggregate([
+        {
+            $lookup: {
+                from: "patients",
+                localField: "patientId",
+                foreignField: "_id",
+                as: "patientData"
+            }
+        },
+        { $unwind: "$patientData" },
+        {
+            $lookup: {
+                from: "doctors",
+                localField: "doctorId",
+                foreignField: "_id",
+                as: "doctorData"
+            }
+        },
+        {
+            $lookup: {
+                from: "slots",
+                localField: "slotsId",
+                foreignField: "_id",
+                as: "slotsData"
+            }
+        }
+    ]).exec((err, result) => {
+        if (err) {
+            console.log("error", err);
+        }
+        if (result) {
+            return res.status(200).json(result);
+        }
+    });
 }));
 exports.default = router;

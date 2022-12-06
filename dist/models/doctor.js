@@ -42,6 +42,10 @@ const doctorSchema = new mongoose_1.default.Schema({
         type: String,
         required: true,
     },
+    qualification: {
+        type: String,
+        required: true
+    }
 });
 // categorySchema.virtual('id').get(function () {
 //     return this._id.toHexString();

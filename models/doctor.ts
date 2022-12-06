@@ -12,6 +12,7 @@ interface doctorSchemaTypes {
     address: string;
     about: string;
     registered: string;
+    qualification: string;
   }
 
 const doctorSchema = new mongoose.Schema<doctorSchemaTypes>({
@@ -51,6 +52,10 @@ const doctorSchema = new mongoose.Schema<doctorSchemaTypes>({
         type: String,
         required: true,
     },
+    qualification: {
+        type: String,
+        required: true
+    }
 })
 // categorySchema.virtual('id').get(function () {
 //     return this._id.toHexString();

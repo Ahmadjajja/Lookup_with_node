@@ -17,6 +17,7 @@ const router = express_1.default.Router();
 const booking_1 = __importDefault(require("../models/booking"));
 router.get('/b', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const bookingList = yield booking_1.default.aggregate([
+        // { $match : { patientId :"638b3634db25622c44f127af" } },   //will only return document that has given field value
         {
             $lookup: {
                 from: "patients",
@@ -34,6 +35,7 @@ router.get('/b', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
                 as: "doctorData"
             }
         },
+        { $unwind: "$doctorData" },
         {
             $lookup: {
                 from: "slots",
@@ -41,7 +43,14 @@ router.get('/b', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
                 foreignField: "_id",
                 as: "slotsData"
             }
-        }
+        },
+        { $unwind: "$slotsData" },
+        { $addFields: { day: "wednesday" } },
+        // { $limit : 1 }    // This will return the first specified elements(objects)
+        // { $group : { patientId :"$slotsData" } }   // why error occuring
+        { $group: { _id: '$patientId', totaldocs: { $sum: 1 } } }
+        // { $project : { _id : 1, patientId: 0, doctorId: 0, slotsId: 0 } }, // using for getting required fields
+        // { $count : 'total_documents' }    //This will return only the total documents in the previous stage
     ]).exec((err, result) => {
         if (err) {
             console.log("error", err);
